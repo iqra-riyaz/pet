@@ -1,22 +1,17 @@
-# Maven
-# Build your Java project and run tests with Apache Maven.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/java
-
 trigger:
 - master
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: ubuntu-latest  # This runs the job on a Microsoft-hosted agent
 
 steps:
 - task: Maven@3
   inputs:
-    mavenPomFile: 'pom.xml'
+    mavenPomFile: 'pom.xml'  # Make sure this path is correct in your repo
     mavenOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
+    jdkVersionOption: '1.11'  # You can change to 17 or 21 if needed
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
+    goals: 'package'  # You can change to 'clean install' if you want to clean and install too
