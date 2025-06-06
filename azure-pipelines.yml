@@ -2,16 +2,16 @@ trigger:
 - master
 
 pool:
-  vmImage: ubuntu-latest  # This runs the job on a Microsoft-hosted agent
+  name: Default  # ✅ This tells Azure to use your self-hosted agent
 
 steps:
 - task: Maven@3
   inputs:
-    mavenPomFile: 'pom.xml'  # Make sure this path is correct in your repo
+    mavenPomFile: 'pom.xml'
     mavenOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'  # You can change to 17 or 21 if needed
+    jdkVersionOption: '1.11'
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'  # You can change to 'clean install' if you want to clean and install too
+    goals: 'package'
